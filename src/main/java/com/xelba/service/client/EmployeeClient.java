@@ -21,14 +21,13 @@ public class EmployeeClient {
     public Response createEmp(String empJson) {
 
         Client client = ClientBuilder.newClient();
-        WebTarget target = client.target("http://localhost:8080/XelbaMySQLRest/employee/create");
+        WebTarget target = client.target("http://localhost:8080/XelbaMySQLRest/rest/employee/create");
         Response response = target.request().post(Entity.json(empJson));
         String queryRespose = response.readEntity(String.class);
 
         if (response.getStatus() != 200) {
             throw new RuntimeException("Failed : HTTP error code : " + response.getStatus());
         }
-        String output = "Created entry with the following details:" + queryRespose;
-        return Response.status(200).entity(output).build();
+        return Response.status(200).entity(queryRespose).build();
     }
 }
