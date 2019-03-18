@@ -1,6 +1,7 @@
 package com.xelba.service;
  
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -49,31 +50,30 @@ public class EmployeeService {
 	@POST
 	@Path("/update/{id}")
 	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.TEXT_HTML)
 	public Response updateEmp(@PathParam("id") Integer id, String empJson) {
 		Gson gson = new Gson();
 		Employee transientEmp = gson.fromJson(empJson, Employee.class);
 		transientEmp.setEmpId(id);
 		EmployeeDao dao = new EmployeeDao();
 		dao.updateEmp(transientEmp);
-		String output = gson.toJson(transientEmp);
+		String output = transientEmp.toString();
 		return Response.status(200).entity(output).build();
 	}
 
-	@POST
+	@GET
 	@Path("/fetch/{id}")
-	@Produces(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.TEXT_HTML)
 	public Response fetchEmp(@PathParam("id") Integer id) {
-		Gson gson = new Gson();
 		EmployeeDao dao = new EmployeeDao();
 		Employee emp = dao.getEmp(id);
-		String output = gson.toJson(emp);
+		String output = emp.toString();
 		return Response.status(200).entity(output).build();
 	}
 
-	@POST
+	@DELETE
 	@Path("/delete/{id}")
-	@Produces(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.TEXT_HTML)
 	public Response deleteEmp(@PathParam("id") Integer id) {
 		EmployeeDao dao = new EmployeeDao();
 		Employee emp = dao.getEmp(id);
