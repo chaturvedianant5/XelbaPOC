@@ -1,10 +1,11 @@
 # Xelba-POC
-POC for the upcoming Xelba product.
+Sample REST application made in JAVA.
 * Written in JAVA.
 * Built using Maven.
 * Uses Glassfish Jersey for REST implementation (both client and server).
 * Uses Eclipse persistence (JPA implementation) to connect with underlying MySQL db.
 * Uses JJWT for JSON Web Token implementation.
+* Uses javax ContainerRequestFilter to filter out requests (authorization implementation).
 
 ### Prerequisites
 1. Maven is required to build the project war.
